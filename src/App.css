@@ -1,0 +1,32 @@
+:root {
+  --pale-grey: #edede9;
+  --mushroom: #d6ccc2;
+  --tissue: #f5ebe0;
+  --nude: #e3d5ca;
+  --light-brown: #d5bdaf;
+  --dusky: #9a8c98;
+  --dusk: #4a4e69;
+  --night: #22223b;
+  --orange: #fec89a;
+  --light-orange: #ffd7ba;
+  --mint: #d8e2dc;
+  --light-mint: #e8e8e4;
+  --rose: #fec5bb;
+  --light-rose: #fae1dd;
+}
+
+#root {
+  max-width: 1280px;
+  margin: auto;
+  padding: 0;
+  text-align: center;
+}
+
+.App {
+  margin: auto;
+  height: 90vh;
+}
+
+.App > h1 {
+  margin-bottom: 0.2em;
+}
