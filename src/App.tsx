@@ -1,5 +1,5 @@
 import { useState, FormEvent, Dispatch, SetStateAction } from "react";
-import { Submission_Information as data } from "./assets/Accepted-Papers-20221027.json";
+import { Submission_Information } from "./assets/Accepted-Papers-20221027.json";
 import "./App.css";
 import Card from "./components/Card";
 import Modal from "./components/Modal";
@@ -37,6 +37,7 @@ export type dataProps = {
 };
 
 function App() {
+  const [data, setData] = useState(Submission_Information);
   const [query, setQuery] = useState<string>("");
   const [modal, setModal] = useState<number>(0);
   const [showSaved, setShowSaved] = useState<boolean>(false);
@@ -44,7 +45,17 @@ function App() {
 
   return (
     <div className="App">
-      <h1>Acadex</h1>
+      <h1
+        onClick={() => {
+          setQuery("");
+          setModal(0);
+          setShowSaved(false);
+          setData(Submission_Information);
+        }}
+        style={{ cursor: "pointer" }}
+      >
+        Acadex
+      </h1>
       <div style={{ ...styles.wrapper, ...styles.searchbar }}>
         <input
           type="text"
@@ -53,15 +64,33 @@ function App() {
           onChange={(e: FormEvent<HTMLInputElement>) => {
             setQuery(e.currentTarget.value);
           }}
+          onKeyDown={(event) => {
+            event.key === "Enter" &&
+              query !== "" &&
+              setData((prev) =>
+                prev.filter((sub: dataProps) => {
+                  return sub.Title.toLowerCase().includes(query);
+                })
+              );
+          }}
         />
-        <button style={{ marginLeft: "0.5em" }}>Search</button>
+        <button
+          style={{ marginLeft: "0.5em" }}
+          onClick={() => {
+            query !== "" &&
+              setData((prev) =>
+                prev.filter((sub: dataProps) => {
+                  return sub.Title.toLowerCase().includes(query);
+                })
+              );
+          }}
+        >
+          Search
+        </button>
       </div>
       <div style={{ ...styles.wrapper, ...styles.controls }}>
         <p>{data.length} Submissions</p>
         <div>
-          <button style={{ marginRight: "0.5em", padding: ".5em" }}>
-            Sort
-          </button>
           <button style={{ marginRight: "0.5em", padding: ".5em" }}>
             Filter
           </button>
@@ -75,7 +104,8 @@ function App() {
                 : { backgroundColor: "#f9f9f9", color: "red", padding: ".5em" }
             }
           >
-            <i className="fa">&#xf097; {localStorage.length}</i>
+            <i className="fa">&#xf097;</i>
+            <span> {localStorage.length}</span>
           </button>
         </div>
       </div>
@@ -130,7 +160,7 @@ function App() {
             return <Card key={sub.ID} {...props} />;
           })
         ) : (
-          <p>No Saved Items</p>
+          <>{query === "" && <p>No Saved Items</p>}</>
         )}
       </div>
     </div>
