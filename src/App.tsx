@@ -118,6 +118,9 @@ function App() {
           setShowSaved(false);
           setData(Submission_Information);
           showFilter(false);
+          setSelectedTrack([]);
+          setSelectedSubType([]);
+          setSelectedAccStatus([]);
         }}
         style={{ cursor: "pointer" }}
       >

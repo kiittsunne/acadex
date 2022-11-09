@@ -45,17 +45,19 @@ const Modal = (props: dataProps) => {
         }}
       >
         <p>
-          #{props.ID}{" "}
+          #{props.ID}
           {props.ARRLink && (
-            <i
-              className="fa fa-external-link"
-              aria-hidden="true"
-              style={{
-                marginLeft: "0.25em",
-                color: "var(--nude)",
-                cursor: "pointer",
-              }}
-            ></i>
+            <a href={props.ARRLink}>
+              <i
+                className="fa fa-external-link"
+                aria-hidden="true"
+                style={{
+                  marginLeft: "0.25em",
+                  color: "var(--nude)",
+                  cursor: "pointer",
+                }}
+              ></i>
+            </a>
           )}
         </p>
         <div
