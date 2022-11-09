@@ -1,8 +1,17 @@
-import { useState, FormEvent, Dispatch, SetStateAction } from "react";
+import {
+  useState,
+  FormEvent,
+  Dispatch,
+  SetStateAction,
+  useEffect,
+} from "react";
 import { Submission_Information } from "./assets/Accepted-Papers-20221027.json";
+// import { Author_Names as authorOptions } from "./assets/author_names.json";
+import { Tracks, SubType, AccStatus } from "./assets/filter_options.json";
 import "./App.css";
 import Card from "./components/Card";
 import Modal from "./components/Modal";
+import { MultiSelect } from "react-multi-select-component";
 
 const styles = {
   wrapper: {
@@ -10,10 +19,12 @@ const styles = {
     flexDirection: "row",
   },
   searchbar: {
+    display: "flex",
+    flexDirection: "column",
     margin: "auto",
     width: "40vw",
-    height: "40px",
-    justifyContent: "center",
+    height: "100px",
+    justifyContent: "space-between",
     alignItems: "center",
   },
   controls: {
@@ -27,7 +38,7 @@ export type dataProps = {
   ID: number;
   Title: string;
   Authors: string;
-  Track?: string;
+  Track: string;
   Submission_Type?: string;
   Acceptance_Status?: string;
   Abstract?: string;
@@ -36,62 +47,136 @@ export type dataProps = {
   setModal?: Dispatch<SetStateAction<number>>;
 };
 
+// type authorDataProps = {
+//   name: string;
+//   papers: number;
+//   subs: dataProps[];
+// };
+
 function App() {
-  const [data, setData] = useState(Submission_Information);
+  const [data, setData] = useState<dataProps[]>(Submission_Information);
   const [query, setQuery] = useState<string>("");
+  const [filter, showFilter] = useState<boolean>(false);
+  // const [selectedAuthors, setSelectedAuthors] = useState([]);
+  const [selectedSubType, setSelectedSubType] = useState<any>([]);
+  const [selectedAccStatus, setSelectedAccStatus] = useState<any>([]);
+  const [selectedTrack, setSelectedTrack] = useState<any>([]);
   const [modal, setModal] = useState<number>(0);
   const [showSaved, setShowSaved] = useState<boolean>(false);
   let localStorage = JSON.parse(window.localStorage.getItem("saved") || "{}");
 
+  function handleFilter() {
+    let tracks: string[] = [];
+    let types: string[] = [];
+    let status: string[] = [];
+    if (selectedTrack.length) {
+      tracks = selectedTrack.map((el: { label: string; value: string }) => {
+        return el.value;
+      });
+    }
+    if (selectedSubType.length) {
+      types = selectedSubType.map((el: { label: string; value: string }) => {
+        return el.value;
+      });
+    }
+    if (selectedAccStatus.length) {
+      status = selectedAccStatus.map((el: { label: string; value: string }) => {
+        return el.value;
+      });
+    }
+
+    setData((prev) => {
+      return prev.filter((el: dataProps) => {
+        let hasTracks =
+          el.Track && tracks.length ? tracks.includes(el.Track) : true;
+        let hasTypes =
+          el.Submission_Type && types.length
+            ? types.includes(el.Submission_Type)
+            : true;
+        let hasStatus =
+          el.Acceptance_Status && status.length
+            ? status.includes(el.Acceptance_Status)
+            : true;
+        let result = hasTracks && hasTypes && hasStatus;
+        return result;
+      });
+    });
+  }
+
+  useEffect(() => {
+    console.log(data.length);
+  }, [data]);
+
   return (
     <div className="App">
+      {/* Title/ home button */}
       <h1
         onClick={() => {
           setQuery("");
           setModal(0);
           setShowSaved(false);
           setData(Submission_Information);
+          showFilter(false);
         }}
         style={{ cursor: "pointer" }}
       >
         Acadex
       </h1>
-      <div style={{ ...styles.wrapper, ...styles.searchbar }}>
+
+      {/* Search input and button */}
+      <div style={styles.searchbar}>
         <input
           type="text"
           value={query}
-          style={{ alignSelf: "stretch", width: "300px" }}
+          style={{ alignSelf: "stretch", height: "35%", marginBottom: ".5em" }}
           onChange={(e: FormEvent<HTMLInputElement>) => {
             setQuery(e.currentTarget.value);
           }}
-          onKeyDown={(event) => {
-            event.key === "Enter" &&
-              query !== "" &&
-              setData((prev) =>
-                prev.filter((sub: dataProps) => {
-                  return sub.Title.toLowerCase().includes(query);
-                })
-              );
-          }}
         />
-        <button
-          style={{ marginLeft: "0.5em" }}
-          onClick={() => {
-            query !== "" &&
-              setData((prev) =>
-                prev.filter((sub: dataProps) => {
-                  return sub.Title.toLowerCase().includes(query);
-                })
-              );
-          }}
-        >
-          Search
-        </button>
+        <div>
+          <button
+            style={{ margin: ".25em .5em", padding: ".5em" }}
+            onClick={() => {
+              query !== "" &&
+                setData((prev) =>
+                  prev.filter((sub: dataProps) => {
+                    return sub.Title.toLowerCase().includes(
+                      query.toLowerCase()
+                    );
+                  })
+                );
+            }}
+          >
+            Search Titles
+          </button>
+          <button
+            style={{ margin: ".25em .5em", padding: ".5em" }}
+            onClick={() => {
+              query !== "" &&
+                setData((prev) =>
+                  prev.filter((sub: dataProps) => {
+                    return sub.Authors.toLowerCase().includes(
+                      query.toLowerCase()
+                    );
+                  })
+                );
+            }}
+          >
+            Search Authors
+          </button>
+        </div>
       </div>
+
+      {/* Submissions printout, filter & saved button */}
       <div style={{ ...styles.wrapper, ...styles.controls }}>
         <p>{data.length} Submissions</p>
         <div>
-          <button style={{ marginRight: "0.5em", padding: ".5em" }}>
+          <button
+            style={{ marginRight: "0.5em", padding: ".5em" }}
+            onClick={() => {
+              showFilter((prev) => !prev);
+            }}
+          >
             Filter
           </button>
           <button
@@ -109,6 +194,69 @@ function App() {
           </button>
         </div>
       </div>
+
+      {filter && (
+        <div
+          style={{
+            width: "100%",
+            margin: "auto",
+            padding: "0 0 1em 0",
+            border: "1px solid var(--dusk)",
+            borderRadius: "4pt",
+            textAlign: "left",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            flexWrap: "wrap",
+          }}
+        >
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "center",
+            }}
+          >
+            <div style={{ width: "300px", margin: ".75em" }}>
+              <p style={{ margin: "0 0 0 0.5em" }}>Tracks:</p>
+              <MultiSelect
+                options={Tracks}
+                value={selectedTrack}
+                onChange={setSelectedTrack}
+                labelledBy="Tracks"
+              />
+            </div>
+            <div style={{ width: "150px", margin: ".75em" }}>
+              <p style={{ margin: "0 0 0 0.5em" }}>Type:</p>
+              <MultiSelect
+                options={SubType}
+                value={selectedSubType}
+                onChange={setSelectedSubType}
+                labelledBy="Submission Type"
+              />
+            </div>
+            <div style={{ width: "150px", margin: ".75em" }}>
+              <p style={{ margin: "0 0 0 0.5em" }}>Status:</p>
+              <MultiSelect
+                options={AccStatus}
+                value={selectedAccStatus}
+                onChange={setSelectedAccStatus}
+                labelledBy="Acceptance Status"
+              />
+            </div>
+          </div>
+          <button
+            style={{ width: "200px", margin: "auto" }}
+            onClick={() => {
+              handleFilter();
+            }}
+          >
+            Filter
+          </button>
+        </div>
+      )}
+
+      {/* Modal  */}
       <div>
         {modal > 0 &&
           data
@@ -139,6 +287,8 @@ function App() {
               );
             })}
       </div>
+
+      {/* Submission cards */}
       <div
         style={{
           display: "flex",
@@ -148,19 +298,21 @@ function App() {
           justifyContent: "space-around",
         }}
       >
+        {/* Show all cards */}
         {!showSaved &&
-          data &&
           data.map((sub: dataProps) => {
             let props = { ...sub, cursor: "pointer", setModal: setModal };
             return <Card key={sub.ID} {...props} />;
           })}
+
+        {/* Show only saved cards */}
         {showSaved && localStorage.length !== 0 ? (
           localStorage.map((sub: dataProps) => {
             let props = { ...sub, cursor: "pointer", setModal: setModal };
             return <Card key={sub.ID} {...props} />;
           })
         ) : (
-          <>{query === "" && <p>No Saved Items</p>}</>
+          <>{showSaved && query === "" && <p>No Saved Items</p>}</>
         )}
       </div>
     </div>

@@ -1,0 +1,164 @@
+{
+  "Tracks": [
+    { "label": "NLP Applications (94)", "value": "NLP Applications" },
+    {
+      "label": "Resources and Evaluation (90)",
+      "value": "Resources and Evaluation"
+    },
+    {
+      "label": "Language Modeling and Analysis of Language Models (85)",
+      "value": "Language Modeling and Analysis of Language Models"
+    },
+    {
+      "label": "Machine Learning for NLP (84)",
+      "value": "Machine Learning for NLP"
+    },
+    {
+      "label": "Dialogue and Interactive Systems (83)",
+      "value": "Dialogue and Interactive Systems"
+    },
+    {
+      "label": "Information Extraction (79)",
+      "value": "Information Extraction"
+    },
+    {
+      "label": "Natural Language Generation (75)",
+      "value": "Natural Language Generation"
+    },
+    {
+      "label": "Speech, Vision, Robotics, Multimodal Grounding (74)",
+      "value": "Speech, Vision, Robotics, Multimodal Grounding"
+    },
+    {
+      "label": "Semantics: Lexical, Sentence level, Textual Inference and Other areas (72)",
+      "value": "Semantics: Lexical, Sentence level, Textual Inference and Other areas"
+    },
+    {
+      "label": "Interpretability, Interactivity and Analysis of Models for NLP (71)",
+      "value": "Interpretability, Interactivity and Analysis of Models for NLP"
+    },
+    { "label": "Question Answering (68)", "value": "Question Answering" },
+    { "label": "Machine Translation (68)", "value": "Machine Translation" },
+    {
+      "label": "Efficient Methods for NLP (55)",
+      "value": "Efficient Methods for NLP"
+    },
+    { "label": "Multilinguality (54)", "value": "Multilinguality" },
+    { "label": "Summarization (51)", "value": "Summarization" },
+    {
+      "label": "Information Retrieval and Text Mining (48)",
+      "value": "Information Retrieval and Text Mining"
+    },
+    {
+      "label": "Sentiment Analysis, Stylistic Analysis, and Argument Mining (35)",
+      "value": "Sentiment Analysis, Stylistic Analysis, and Argument Mining"
+    },
+    {
+      "label": "Unsupervised and Weakly-Supervised Methods in NLP (28)",
+      "value": "Unsupervised and Weakly-Supervised Methods in NLP"
+    },
+    { "label": "Theme Track (27)", "value": "Theme Track" },
+    { "label": "Commonsense Reasoning (25)", "value": "Commonsense Reasoning" },
+    {
+      "label": "Computational Social Science and Cultural Analytics (24)",
+      "value": "Computational Social Science and Cultural Analytics"
+    },
+    { "label": "Ethics (21)", "value": "Ethics" },
+    {
+      "label": "Linguistic Theories, Cognitive Modeling and Psycholinguistics (16)",
+      "value": "Linguistic Theories, Cognitive Modeling and Psycholinguistics"
+    },
+    {
+      "label": "Syntax, Parsing and their Applications (15)",
+      "value": "Syntax, Parsing and their Applications"
+    },
+    {
+      "label": "Discourse and Pragmatics (7)",
+      "value": "Discourse and Pragmatics"
+    },
+    {
+      "label": "Phonology, Morphology and Word Segmentation (6)",
+      "value": "Phonology, Morphology and Word Segmentation"
+    },
+    {
+      "label": "Ethic Concerns:Resources and Evaluation (4)",
+      "value": "Ethic Concerns:Resources and Evaluation"
+    },
+    { "label": "Ethic Concerns:Ethics (4)", "value": "Ethic Concerns:Ethics" },
+    {
+      "label": "Ethic Concerns:Speech, Vision, Robotics, Multimodal Grounding (3)",
+      "value": "Ethic Concerns:Speech, Vision, Robotics, Multimodal Grounding"
+    },
+    {
+      "label": "Ethic Concerns:Language Modeling and Analysis of Language Models (2)",
+      "value": "Ethic Concerns:Language Modeling and Analysis of Language Models"
+    },
+    {
+      "label": "Ethic Concerns:Dialogue and Interactive Systems (2)",
+      "value": "Ethic Concerns:Dialogue and Interactive Systems"
+    },
+    {
+      "label": "Ethic Concerns:Unsupervised and Weakly-Supervised Methods in NLP (2)",
+      "value": "Ethic Concerns:Unsupervised and Weakly-Supervised Methods in NLP"
+    },
+    {
+      "label": "Ethic Concerns:Efficient Methods for NLP (1)",
+      "value": "Ethic Concerns:Efficient Methods for NLP"
+    },
+    {
+      "label": "Ethic Concerns:Computational Social Science and Cultural Analytics (1)",
+      "value": "Ethic Concerns:Computational Social Science and Cultural Analytics"
+    },
+    {
+      "label": "Ethic Concerns:Discourse and Pragmatics (1)",
+      "value": "Ethic Concerns:Discourse and Pragmatics"
+    },
+    {
+      "label": "Ethic Concerns:Summarization (1)",
+      "value": "Ethic Concerns:Summarization"
+    },
+    {
+      "label": "Ethic Concerns:Theme Track (1)",
+      "value": "Ethic Concerns:Theme Track"
+    },
+    {
+      "label": "Ethic Concerns:NLP Applications (1)",
+      "value": "Ethic Concerns:NLP Applications"
+    },
+    {
+      "label": "Ethic Concerns:Linguistic Theories, Cognitive Modeling and Psycholinguistics (1)",
+      "value": "Ethic Concerns:Linguistic Theories, Cognitive Modeling and Psycholinguistics"
+    },
+    {
+      "label": "Ethic Concerns:Multilinguality (1)",
+      "value": "Ethic Concerns:Multilinguality"
+    },
+    {
+      "label": "Ethic Concerns:Sentiment Analysis, Stylistic Analysis, and Argument Mining (1)",
+      "value": "Ethic Concerns:Sentiment Analysis, Stylistic Analysis, and Argument Mining"
+    }
+  ],
+  "SubType": [
+    { "label": "Regular Long Paper (1026)", "value": "Regular Long Paper" },
+    { "label": "Regular Short Paper (185)", "value": "Regular Short Paper" },
+    { "label": "ARR - Long Paper (145)", "value": "ARR - Long Paper" },
+    { "label": "ARR - Short Paper (25)", "value": "ARR - Short Paper" }
+  ],
+  "AccStatus": [
+    { "label": "Accept-Poster (653)", "value": "Accept-Poster" },
+    { "label": "Accept-Findings (547)", "value": "Accept-Findings" },
+    { "label": "Accept-Oral (173)", "value": "Accept-Oral" },
+    {
+      "label": "Accept-Conditional-Findings (5)",
+      "value": "Accept-Conditional-Findings"
+    },
+    {
+      "label": "Accept-Conditional-Oral (2)",
+      "value": "Accept-Conditional-Oral"
+    },
+    {
+      "label": "Accept-Conditional-Poster (1)",
+      "value": "Accept-Conditional-Poster"
+    }
+  ]
+}
