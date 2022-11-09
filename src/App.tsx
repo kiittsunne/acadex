@@ -104,8 +104,9 @@ function App() {
   }
 
   useEffect(() => {
-    console.log(data.length);
-  }, [data]);
+    setData(Submission_Information);
+    handleFilter();
+  }, [selectedTrack, selectedSubType, selectedAccStatus]);
 
   return (
     <div className="App">
@@ -295,6 +296,7 @@ function App() {
           flexWrap: "wrap",
           width: "80vw",
           margin: "1em auto 0 auto",
+          paddingBottom: "8em",
           justifyContent: "space-around",
         }}
       >
